@@ -1,0 +1,24 @@
+// scss styles
+@import 'home/homeStyle.scss';
+// helpers
+@import 'dev/helper.scss';
+
+
+
+/*==========  header  ==========*/
+/*give more height to the nav (don't use height!)*/
+.nav {
+    padding: 10px 5px;
+}
+
+/*postion the last item on the far right*/
+.nav [flex]:last-child {
+    text-align: right;
+}
+
+
+/*==========  toast (alert box)  ==========*/
+md-toast {
+    text-align: center;
+}
+

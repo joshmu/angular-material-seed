@@ -1,0 +1,33 @@
+{
+  "name": "angular-material-template",
+  "version": "0.0.1",
+  "authors": [
+    "Josh Mu <mu@joshmu.com>"
+  ],
+  "description": "angular-material starter template",
+  "main": "app/index.html",
+  "keywords": [
+    "angular-material",
+    "josh",
+    "mu",
+    "starter-template"
+  ],
+  "license": "MIT",
+  "homepage": "www.joshmu.com",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "git://github.com/angular/bower-material.git#master",
+    "font-awesome": "~4.2.0",
+    "angular-route": "~1.3.3"
+  },
+  "resolutions": {
+    "angular": "1.3.3"
+  }
+}

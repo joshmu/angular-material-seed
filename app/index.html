@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='starterTemplate'>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Angular-Material Starter Template</title>
+
+    <!-- styles -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
+
+    <!-- themes (always check themes folder as there are always more which are added)-->
+    <link rel="stylesheet" href="bower_components/angular-material/themes/amber-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/themes/blue-grey-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/themes/blue-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/themes/brown-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/themes/cyan-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/themes/deep-orange-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/themes/deep-purple-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/themes/green-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/themes/grey-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/themes/indigo-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/themes/light-blue-dark-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/themes/light-green-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/themes/lime-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/themes/orange-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/themes/pink-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/themes/purple-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/themes/red-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/themes/teal-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-material/themes/yellow-theme.css">
+
+    <!-- custom -->
+    <link rel="stylesheet" href="dist/css/bundle.css">
+</head>
+
+<body ng-controller='GlobalCtrl as global'>
+    <!-- header -->
+    <header>
+        <!-- nav -->
+        <md-toolbar md-theme='indigo' class='nav'>
+            <div class="md-toolbar-tools" layout='row' layout-align='space-between'>
+                <div flex>
+                    <md-button ng-click='global.toggleSidenav()' class='md-primary md-fab' aria-label='toggle sidenav'><i class="fa fa-bars"></i>
+                    </md-button>
+                </div>
+                <div flex>
+                    <a href="http://www.joshmu.com" target="_blank">
+                        <md-button>www.joshmu.com</md-button>
+                    </a>
+                </div>
+            </div>
+        </md-toolbar>
+
+        <!-- sidenav -->
+        <md-sidenav md-theme='orange' class="md-sidenav-left md-whiteframe-z2" md-component-id="sidenav">
+            <md-toolbar>
+                <h1 class="md-toolbar-tools">Sidenav Left</h1>
+            </md-toolbar>
+            <md-content class="md-padding">
+                <md-button ng-click="global.toggleSidenav()" class="md-primary">
+                    Close Sidenav Left
+                </md-button>
+            </md-content>
+        </md-sidenav>
+    </header>
+    <!-- end header -->
+
+
+    <!-- content -->
+    <div layout="row" layout-align="space-around center" layout-padding>
+        <div flex>
+            <div layout='row' layout-align="space-around">
+                <md-button ng-click='global.showToast()' md-theme='grey' style='padding:20px' class='md-raised md-primary' aria-label='notify'>Notify!</md-button>
+            </div>
+        </div>
+        <div flex="20">
+            <md-card>
+                <a href="#!/cubes">
+                    <div layout="row" layout-align='center'>
+                        <md-progress-circular md-mode='indeterminate' md-theme="indigo"></md-progress-circular>
+                    </div>
+                </a>
+            </md-card>
+        </div>
+        <div flex>
+            <div layout='row' layout-align="space-around">
+                <md-button ng-click='global.showSheet()' md-theme='cyan' class="md-fab md-primary" aria-label='star'><i class="fa fa-star-o"></i>
+                </md-button>
+            </div>
+        </div>
+    </div>
+    <!-- end content -->
+
+
+    <!-- routes -->
+    <ng-view></ng-view>
+
+
+    <!-- scripts -->
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="bower_components/hammerjs/hammer.min.js"></script>
+    <script src="bower_components/angular-material/angular-material.min.js"></script>
+
+    <!-- app -->
+    <script src="dist/js/bundle.js"></script>
+</body>
+
+</html>
