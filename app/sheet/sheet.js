@@ -1,3 +1,4 @@
+(function() {
 'use strict';
 
 angular.module('starterTemplate')
@@ -20,3 +21,5 @@ angular.module('starterTemplate')
   };
 
 });
+})();
+

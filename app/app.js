@@ -1,3 +1,4 @@
+(function() {
 'use strict';
 
 angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
@@ -41,3 +42,4 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
     };
 });
 
+})();
