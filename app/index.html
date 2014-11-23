@@ -41,14 +41,16 @@
         <!-- nav -->
         <md-toolbar md-theme='indigo' class='nav'>
             <div class="md-toolbar-tools" layout='row' layout-align='space-between'>
-                <div flex>
+                <div flex layout='row' layout-align='start center'>
                     <md-button ng-click='global.toggleSidenav()' class='md-primary md-fab' aria-label='toggle sidenav'><i class="fa fa-bars"></i>
                     </md-button>
+                    <span style='margin-left:10px'>{{global.auth.user.email}}</span>
                 </div>
                 <div flex>
-                    <a href="#!/login">
+                    <a ng-hide='global.auth.user' href="#!/login">
                         <md-button>Login/Register</md-button>
                     </a>
+                        <md-button ng-show='global.auth.user' ng-click='global.logout()'>Logout</md-button>
                 </div>
             </div>
         </md-toolbar>

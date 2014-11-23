@@ -5,6 +5,7 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
 
 .config(function($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
+
     // routes
     $routeProvider
         .when('/', {
@@ -25,12 +26,28 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
         });
 })
 
-.controller('GlobalCtrl', function($mdSidenav, $mdToast, $mdBottomSheet) {
+.controller('GlobalCtrl', function(Auth, $mdSidenav, $mdToast, $mdBottomSheet) {
+        this.auth = Auth;
+
+        this.logout = function() {
+            this.auth.logout()
+                .then(function(data) {
+                        console.log(data);
+                }, function() {
+                    console.log('logout failed...');
+                }); 
+        };
+
     this.showToast = function() {
         $mdToast.show({
             templateUrl: 'components/toast/toastView.html',
             hideDelay: 5000,
-            position: 'bottom right'
+            position: 'bottom right',
+            controller: 'ToastCtrl',
+            controllerAs: 'toast',
+            locals: {
+                msg: 'Hello there!'
+            }
         });
     };
 
@@ -54,26 +71,28 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
 
         angular.module('starterTemplate')
 
-        .factory('Auth', function() {
+        .factory('Auth', function($q) {
                 var auth = {};
 
-                auth.user = {};
+                // undefined whenever user is not logged in
+                auth.user = undefined; 
 
                 auth.login = function(user) {
                         var deferred = $q.defer();
-                        if(user.name === 'test' && user.password === 'test') {
+                        // auth set to true when 'test' used in pass (development)
+                        if(user.password === 'test') {
                                 auth.user = user;
-                                defer.resolve('Login successful', user);
+                                deferred.resolve('Login successful', user);
                         } else {
                                 auth.user = {};
-                                defer.reject();
+                                deferred.reject();
                         }
-                        return defer.promise;
+                        return deferred.promise;
                 };
 
                 auth.logout = function() {
                         var deferred = $q.defer();
-                        auth.user = {};
+                        auth.user = undefined;
                         if(!auth.user) {
                                 deferred.resolve('Logged out.');
                         } else {
@@ -104,7 +123,7 @@ angular.module('starterTemplate')
 
         angular.module('starterTemplate')
 
-        .controller('LoginCtrl', function(Auth, $mdToast) {
+        .controller('LoginCtrl', function(Auth, $mdToast, $location) {
 
                 this.auth = Auth;
 
@@ -114,12 +133,20 @@ angular.module('starterTemplate')
                     this.auth.login(this.user)
                         .then(function(data, user) {
                             $mdToast.show({
-                                    templateUrl: 'app/components/toast/toastView.html',
+                                    templateUrl: 'components/toast/toastView.html',
                                     hideDelay: 5000,
-                                    position: 'bottom right'
+                                    position: 'bottom right',
+                                    controller: 'ToastCtrl',
+                                    controllerAs: 'toast',
+                                    locals: {
+                                            msg: data
+                                    }
                             });
                         }, function() {
                                 console.log('login failed....');
+                        })
+                        .then(function() {
+                                $location.path('#!/home');
                         });   
                 };
 
@@ -151,3 +178,13 @@ angular.module('starterTemplate')
 });
 })();
 
+
+(function() {
+        'use strict';
+
+        angular.module('starterTemplate')
+
+        .controller('ToastCtrl', function(msg) {
+                this.msg = msg;
+        });
+})();

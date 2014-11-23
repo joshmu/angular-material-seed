@@ -2,8 +2,26 @@
 
         <!-- login content -->
         <div layout='row' layout-align='center center' layout-fill>
-                <md-whiteframe layout layout-fill layout-align='center center' flex='50' class='md-whiteframe-z2'>
+                <md-whiteframe flex='50' class='md-whiteframe-z2'>
+
+                <md-toolbar md-theme='pink' class='helper-center'>
                         <h1>Login Page</h1>
+                </md-toolbar>
+
+                <form>
+                        <span>Pass = 'test' for successful login.</span>
+                    <div layout='row' layout-align='space-around'>
+                         <md-text-float label='email' ng-model='login.user.email' type='email'></md-text-float>
+                         <md-text-float label='password' ng-model='login.user.password' type='password'></md-text-float>
+                    </div>
+                    <div layout layout-align='center center' layout-padding>
+                            <md-button ng-click='login.login()' class='md-raised' md-theme='amber'>
+                            Login/Register
+                            </md-button>
+                    </div>
+                </form>
+
+
                 </md-whiteframe>
         </div>
 
@@ -11,6 +29,6 @@
         <a href='#!/home' style='margin-top:30px'>
                 <md-button md-theme='lime' class='md-primary md-raised'>Back Home</md-button>
         </a>
-        
+
 </div>
 

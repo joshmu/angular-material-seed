@@ -3,26 +3,28 @@
 
         angular.module('starterTemplate')
 
-        .factory('Auth', function() {
+        .factory('Auth', function($q) {
                 var auth = {};
 
-                auth.user = {};
+                // undefined whenever user is not logged in
+                auth.user = undefined; 
 
                 auth.login = function(user) {
                         var deferred = $q.defer();
-                        if(user.name === 'test' && user.password === 'test') {
+                        // auth set to true when 'test' used in pass (development)
+                        if(user.password === 'test') {
                                 auth.user = user;
-                                defer.resolve('Login successful', user);
+                                deferred.resolve('Login successful', user);
                         } else {
                                 auth.user = {};
-                                defer.reject();
+                                deferred.reject();
                         }
-                        return defer.promise;
+                        return deferred.promise;
                 };
 
                 auth.logout = function() {
                         var deferred = $q.defer();
-                        auth.user = {};
+                        auth.user = undefined;
                         if(!auth.user) {
                                 deferred.resolve('Logged out.');
                         } else {

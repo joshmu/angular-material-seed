@@ -5,6 +5,7 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
 
 .config(function($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
+
     // routes
     $routeProvider
         .when('/', {
@@ -25,12 +26,28 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
         });
 })
 
-.controller('GlobalCtrl', function($mdSidenav, $mdToast, $mdBottomSheet) {
+.controller('GlobalCtrl', function(Auth, $mdSidenav, $mdToast, $mdBottomSheet) {
+        this.auth = Auth;
+
+        this.logout = function() {
+            this.auth.logout()
+                .then(function(data) {
+                        console.log(data);
+                }, function() {
+                    console.log('logout failed...');
+                }); 
+        };
+
     this.showToast = function() {
         $mdToast.show({
             templateUrl: 'components/toast/toastView.html',
             hideDelay: 5000,
-            position: 'bottom right'
+            position: 'bottom right',
+            controller: 'ToastCtrl',
+            controllerAs: 'toast',
+            locals: {
+                msg: 'Hello there!'
+            }
         });
     };
 
