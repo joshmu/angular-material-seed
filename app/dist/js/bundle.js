@@ -12,6 +12,11 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
             controller: 'HomeCtrl',
             controllerAs: 'home'
         })
+        .when('/login', {
+            templateUrl: 'components/login/loginView.html',
+                controller: 'LoginCtrl',
+                controllerAs: 'login'
+        })
         .when('/cubes', {
             templateUrl: 'components/cubes/cubesView.html'
         })
@@ -45,6 +50,46 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
 })();
 
 (function() {
+        'use strict';
+
+        angular.module('starterTemplate')
+
+        .factory('Auth', function() {
+                var auth = {};
+
+                auth.user = {};
+
+                auth.login = function(user) {
+                        var deferred = $q.defer();
+                        if(user.name === 'test' && user.password === 'test') {
+                                auth.user = user;
+                                defer.resolve('Login successful', user);
+                        } else {
+                                auth.user = {};
+                                defer.reject();
+                        }
+                        return defer.promise;
+                };
+
+                auth.logout = function() {
+                        var deferred = $q.defer();
+                        auth.user = {};
+                        if(!auth.user) {
+                                deferred.resolve('Logged out.');
+                        } else {
+                                deferred.reject();
+                        }
+                        return deferred.promise;
+                };
+
+                return auth;
+        });
+
+})();
+
+
+
+(function() {
 'use strict';
 
 angular.module('starterTemplate')
@@ -52,6 +97,33 @@ angular.module('starterTemplate')
 .controller('HomeCtrl', function() {
     this.title = 'Welcome home.';
 });
+})();
+
+(function() {
+        'use strict';
+
+        angular.module('starterTemplate')
+
+        .controller('LoginCtrl', function(Auth, $mdToast) {
+
+                this.auth = Auth;
+
+                this.user = {};
+
+                this.login = function() {
+                    this.auth.login(this.user)
+                        .then(function(data, user) {
+                            $mdToast.show({
+                                    templateUrl: 'app/components/toast/toastView.html',
+                                    hideDelay: 5000,
+                                    position: 'bottom right'
+                            });
+                        }, function() {
+                                console.log('login failed....');
+                        });   
+                };
+
+        });
 })();
 
 (function() {

@@ -12,6 +12,11 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
             controller: 'HomeCtrl',
             controllerAs: 'home'
         })
+        .when('/login', {
+            templateUrl: 'components/login/loginView.html',
+                controller: 'LoginCtrl',
+                controllerAs: 'login'
+        })
         .when('/cubes', {
             templateUrl: 'components/cubes/cubesView.html'
         })
