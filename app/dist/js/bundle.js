@@ -1,3 +1,4 @@
+(function() {
 'use strict';
 
 angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
@@ -7,12 +8,12 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
     // routes
     $routeProvider
         .when('/', {
-            templateUrl: 'home/homeView.html',
+            templateUrl: 'components/home/homeView.html',
             controller: 'HomeCtrl',
             controllerAs: 'home'
         })
         .when('/cubes', {
-            templateUrl: 'cubes/cubesView.html'
+            templateUrl: 'components/cubes/cubesView.html'
         })
         .otherwise({
             redirectTo: '/'
@@ -22,7 +23,7 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
 .controller('GlobalCtrl', function($mdSidenav, $mdToast, $mdBottomSheet) {
     this.showToast = function() {
         $mdToast.show({
-            templateUrl: 'toast/toastView.html',
+            templateUrl: 'components/toast/toastView.html',
             hideDelay: 5000,
             position: 'bottom right'
         });
@@ -32,7 +33,7 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
         $mdBottomSheet.show({
             controller: 'SheetCtrl',
             controllerAs: 'sheet',
-            templateUrl: 'sheet/sheetView.html'
+            templateUrl: 'components/sheet/sheetView.html'
         });
     };
 
@@ -41,7 +42,9 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
     };
 });
 
+})();
 
+(function() {
 'use strict';
 
 angular.module('starterTemplate')
@@ -49,6 +52,9 @@ angular.module('starterTemplate')
 .controller('HomeCtrl', function() {
     this.title = 'Welcome home.';
 });
+})();
+
+(function() {
 'use strict';
 
 angular.module('starterTemplate')
@@ -71,3 +77,5 @@ angular.module('starterTemplate')
   };
 
 });
+})();
+
