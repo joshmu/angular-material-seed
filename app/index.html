@@ -36,56 +36,13 @@
 </head>
 
 <body ng-controller='GlobalCtrl as global'>
-    <!-- header -->
     <header>
-        <!-- nav -->
-
-        <md-toolbar md-theme='indigo' class='nav'>
-            <div class="md-toolbar-tools" layout='row' layout-align='space-between'>
-                <div flex layout='row' layout-align='start center'>
-                    <md-button ng-click='global.toggleSidenav()' class='md-primary md-fab' aria-label='toggle sidenav'><i class="fa fa-bars"></i>
-                    </md-button>
-                    <span style='margin-left:10px'>{{global.auth.user.email}}</span>
-                </div>
-                <div flex>
-                    <a ng-hide='global.auth.user || global.currentPath() === "/login"' href="#!/login">
-                        <md-button>Login/Register</md-button>
-                    </a>
-                    <md-button ng-show='global.auth.user' ng-click='global.logout()'>Logout</md-button>
-                </div>
-            </div>
-        </md-toolbar>
-
-        <!-- sidenav -->
+        <topnav open-sidenav='global.toggleSidenav()'></topnav>
         <sidenav close='global.toggleSidenav()'></sidenav>
     </header>
-    <!-- end header -->
 
 
-    <!-- content -->
-    <div layout="row" layout-align="space-around center" layout-padding>
-        <div flex>
-            <div layout='row' layout-align="space-around">
-                <md-button ng-click='global.showToast()' md-theme='grey' style='padding:20px' class='md-raised md-primary' aria-label='notify'>Notify!</md-button>
-            </div>
-        </div>
-        <div flex="20">
-            <md-card>
-                <a href="#!/cubes">
-                    <div layout="row" layout-align='center'>
-                        <md-progress-circular md-mode='indeterminate' md-theme="indigo"></md-progress-circular>
-                    </div>
-                </a>
-            </md-card>
-        </div>
-        <div flex>
-            <div layout='row' layout-align="space-around">
-                <md-button ng-click='global.showSheet()' md-theme='cyan' class="md-fab md-primary" aria-label='star'><i class="fa fa-star-o"></i>
-                </md-button>
-            </div>
-        </div>
-    </div>
-    <!-- end content -->
+
 
 
     <!-- routes -->

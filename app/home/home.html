@@ -1,9 +1,35 @@
-<div class='home-container' md-theme='lime' layout layout-align="center center">
-    <md-whiteframe class='md-whiteframe-z2' flex='80' layout layout-algin='center center'>
-        <md-toolbar>
-            <div layout="row" layout-align="center center">
-                <h1>{{home.title}}</h1>
+<div>
+    <div class='home-container' md-theme='lime' layout layout-align="center center">
+        <md-whiteframe class='md-whiteframe-z2' flex='80' layout layout-algin='center center'>
+            <md-toolbar>
+                <div layout="row" layout-align="center center">
+                    <h1>{{home.title}}</h1>
+                </div>
+            </md-toolbar>
+        </md-whiteframe>
+    </div>
+    <!-- random content -->
+    <div layout="row" layout-align="space-around center" layout-padding>
+        <div flex>
+            <div layout='row' layout-align="space-around">
+                <md-button ng-click='global.showToast()' md-theme='grey' style='padding:20px' class='md-raised md-primary' aria-label='notify'>Notify!</md-button>
             </div>
-        </md-toolbar>
-    </md-whiteframe>
+        </div>
+        <div flex="20">
+            <md-card>
+                <a href="#!/cubes">
+                    <div layout="row" layout-align='center'>
+                        <md-progress-circular md-mode='indeterminate' md-theme="indigo"></md-progress-circular>
+                    </div>
+                </a>
+            </md-card>
+        </div>
+        <div flex>
+            <div layout='row' layout-align="space-around">
+                <md-button ng-click='global.showSheet()' md-theme='cyan' class="md-fab md-primary" aria-label='star'><i class="fa fa-star-o"></i>
+                </md-button>
+            </div>
+        </div>
+    </div>
+    <!-- end random content -->
 </div>

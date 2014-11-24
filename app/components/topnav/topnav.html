@@ -1,0 +1,15 @@
+<md-toolbar md-theme='indigo' class='nav'>
+    <div class="md-toolbar-tools" layout='row' layout-align='space-between'>
+        <div flex layout='row' layout-align='start center'>
+            <md-button ng-click='topnav.openSidenav()' class='md-primary md-fab' aria-label='toggle sidenav'><i class="fa fa-bars"></i>
+            </md-button>
+            <span style='margin-left:10px'>{{topnav.auth.user.email}}</span>
+        </div>
+        <div flex>
+            <a ng-hide='topnav.auth.user || topnav.currentPath() === "/login"' href="#!/login">
+                <md-button>Login/Register</md-button>
+            </a>
+            <md-button ng-show='topnav.auth.user' ng-click='topnav.logout()'>Logout</md-button>
+        </div>
+    </div>
+</md-toolbar>
