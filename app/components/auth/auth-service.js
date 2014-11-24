@@ -7,7 +7,7 @@
                 var auth = {};
 
                 // undefined whenever user is not logged in
-                auth.user = undefined; 
+                auth.user = undefined;
 
                 auth.login = function(user) {
                         var deferred = $q.defer();
@@ -16,7 +16,7 @@
                                 auth.user = user;
                                 deferred.resolve('Login successful', user);
                         } else {
-                                auth.user = {};
+                                auth.user = undefined;
                                 deferred.reject();
                         }
                         return deferred.promise;

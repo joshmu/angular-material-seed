@@ -4,16 +4,17 @@
         angular.module('starterTemplate')
 
         .controller('LoginCtrl', function(Auth, $mdToast, $location) {
+                var loginCtrl = this;
 
-                this.auth = Auth;
+                loginCtrl.auth = Auth;
 
-                this.user = {};
+                loginCtrl.user = undefined;
 
-                this.login = function() {
-                    this.auth.login(this.user)
+                loginCtrl.login = function() {
+                    loginCtrl.auth.login(loginCtrl.user)
                         .then(function(data, user) {
                             $mdToast.show({
-                                    templateUrl: 'components/toast/toastView.html',
+                                    templateUrl: 'components/toast/toast.html',
                                     hideDelay: 5000,
                                     position: 'bottom right',
                                     controller: 'ToastCtrl',
@@ -24,10 +25,11 @@
                             });
                         }, function() {
                                 console.log('login failed....');
+                                loginCtrl.user = undefined;
                         })
                         .then(function() {
                                 $location.path('#!/home');
-                        });   
+                        });
                 };
 
         });

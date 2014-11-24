@@ -15,7 +15,7 @@ var path = {
         all: ['./app/**/*.html', '!app/bower_components/**/*']
     },
     scss: {
-        main: 'app/style.scss',
+        main: 'app/app.scss',
         all: ['app/**/*.scss', '!app/bower_components/**/*'],
         dist: 'app/dist/css/**/*.css'
     },

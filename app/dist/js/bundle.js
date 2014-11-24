@@ -9,17 +9,17 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
     // routes
     $routeProvider
         .when('/', {
-            templateUrl: 'components/home/homeView.html',
+            templateUrl: 'home/home.html',
             controller: 'HomeCtrl',
             controllerAs: 'home'
         })
         .when('/login', {
-            templateUrl: 'components/login/loginView.html',
+            templateUrl: 'login/login.html',
                 controller: 'LoginCtrl',
                 controllerAs: 'login'
         })
         .when('/cubes', {
-            templateUrl: 'components/cubes/cubesView.html'
+            templateUrl: 'cubes/cubes.html'
         })
         .otherwise({
             redirectTo: '/'
@@ -35,12 +35,12 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
                         console.log(data);
                 }, function() {
                     console.log('logout failed...');
-                }); 
+                });
         };
 
     this.showToast = function() {
         $mdToast.show({
-            templateUrl: 'components/toast/toastView.html',
+            templateUrl: 'components/toast/toast.html',
             hideDelay: 5000,
             position: 'bottom right',
             controller: 'ToastCtrl',
@@ -55,7 +55,7 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
         $mdBottomSheet.show({
             controller: 'SheetCtrl',
             controllerAs: 'sheet',
-            templateUrl: 'components/sheet/sheetView.html'
+            templateUrl: 'components/sheet/sheet.html'
         });
     };
 
@@ -67,6 +67,53 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
 })();
 
 (function() {
+'use strict';
+
+angular.module('starterTemplate')
+
+.controller('HomeCtrl', function() {
+    this.title = 'Welcome home.';
+});
+})();
+
+(function() {
+        'use strict';
+
+        angular.module('starterTemplate')
+
+        .controller('LoginCtrl', function(Auth, $mdToast, $location) {
+                var loginCtrl = this;
+
+                loginCtrl.auth = Auth;
+
+                loginCtrl.user = undefined;
+
+                loginCtrl.login = function() {
+                    loginCtrl.auth.login(loginCtrl.user)
+                        .then(function(data, user) {
+                            $mdToast.show({
+                                    templateUrl: 'components/toast/toast.html',
+                                    hideDelay: 5000,
+                                    position: 'bottom right',
+                                    controller: 'ToastCtrl',
+                                    controllerAs: 'toast',
+                                    locals: {
+                                            msg: data
+                                    }
+                            });
+                        }, function() {
+                                console.log('login failed....');
+                                loginCtrl.user = undefined;
+                        })
+                        .then(function() {
+                                $location.path('#!/home');
+                        });
+                };
+
+        });
+})();
+
+(function() {
         'use strict';
 
         angular.module('starterTemplate')
@@ -75,7 +122,7 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
                 var auth = {};
 
                 // undefined whenever user is not logged in
-                auth.user = undefined; 
+                auth.user = undefined;
 
                 auth.login = function(user) {
                         var deferred = $q.defer();
@@ -84,7 +131,7 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
                                 auth.user = user;
                                 deferred.resolve('Login successful', user);
                         } else {
-                                auth.user = {};
+                                auth.user = undefined;
                                 deferred.reject();
                         }
                         return deferred.promise;
@@ -107,51 +154,6 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
 })();
 
 
-
-(function() {
-'use strict';
-
-angular.module('starterTemplate')
-
-.controller('HomeCtrl', function() {
-    this.title = 'Welcome home.';
-});
-})();
-
-(function() {
-        'use strict';
-
-        angular.module('starterTemplate')
-
-        .controller('LoginCtrl', function(Auth, $mdToast, $location) {
-
-                this.auth = Auth;
-
-                this.user = {};
-
-                this.login = function() {
-                    this.auth.login(this.user)
-                        .then(function(data, user) {
-                            $mdToast.show({
-                                    templateUrl: 'components/toast/toastView.html',
-                                    hideDelay: 5000,
-                                    position: 'bottom right',
-                                    controller: 'ToastCtrl',
-                                    controllerAs: 'toast',
-                                    locals: {
-                                            msg: data
-                                    }
-                            });
-                        }, function() {
-                                console.log('login failed....');
-                        })
-                        .then(function() {
-                                $location.path('#!/home');
-                        });   
-                };
-
-        });
-})();
 
 (function() {
 'use strict';

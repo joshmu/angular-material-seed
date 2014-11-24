@@ -9,17 +9,17 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
     // routes
     $routeProvider
         .when('/', {
-            templateUrl: 'components/home/homeView.html',
+            templateUrl: 'home/home.html',
             controller: 'HomeCtrl',
             controllerAs: 'home'
         })
         .when('/login', {
-            templateUrl: 'components/login/loginView.html',
+            templateUrl: 'login/login.html',
                 controller: 'LoginCtrl',
                 controllerAs: 'login'
         })
         .when('/cubes', {
-            templateUrl: 'components/cubes/cubesView.html'
+            templateUrl: 'cubes/cubes.html'
         })
         .otherwise({
             redirectTo: '/'
@@ -35,12 +35,12 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
                         console.log(data);
                 }, function() {
                     console.log('logout failed...');
-                }); 
+                });
         };
 
     this.showToast = function() {
         $mdToast.show({
-            templateUrl: 'components/toast/toastView.html',
+            templateUrl: 'components/toast/toast.html',
             hideDelay: 5000,
             position: 'bottom right',
             controller: 'ToastCtrl',
@@ -55,7 +55,7 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
         $mdBottomSheet.show({
             controller: 'SheetCtrl',
             controllerAs: 'sheet',
-            templateUrl: 'components/sheet/sheetView.html'
+            templateUrl: 'components/sheet/sheet.html'
         });
     };
 
