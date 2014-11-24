@@ -18,6 +18,17 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
                 controller: 'LoginCtrl',
                 controllerAs: 'login'
         })
+        .when('/shop/:productIndex', {
+            templateUrl: 'shop/shop.html',
+            controller: 'ShopCtrl',
+            controllerAs: 'shop',
+            resolve: {
+                product: function($route, Products) {
+                    var productIndex = $route.current.params.productIndex;
+                    return Products.get(productIndex);
+                }
+            }
+        })
         .when('/cubes', {
             templateUrl: 'cubes/cubes.html'
         })

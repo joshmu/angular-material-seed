@@ -39,6 +39,7 @@
     <!-- header -->
     <header>
         <!-- nav -->
+
         <md-toolbar md-theme='indigo' class='nav'>
             <div class="md-toolbar-tools" layout='row' layout-align='space-between'>
                 <div flex layout='row' layout-align='start center'>
@@ -50,22 +51,13 @@
                     <a ng-hide='global.auth.user || global.currentPath() === "/login"' href="#!/login">
                         <md-button>Login/Register</md-button>
                     </a>
-                        <md-button ng-show='global.auth.user' ng-click='global.logout()'>Logout</md-button>
+                    <md-button ng-show='global.auth.user' ng-click='global.logout()'>Logout</md-button>
                 </div>
             </div>
         </md-toolbar>
 
         <!-- sidenav -->
-        <md-sidenav md-theme='orange' class="md-sidenav-left md-whiteframe-z2" md-component-id="sidenav">
-            <md-toolbar>
-                <h1 class="md-toolbar-tools">Sidenav Left</h1>
-            </md-toolbar>
-            <md-content class="md-padding">
-                <md-button ng-click="global.toggleSidenav()" class="md-primary">
-                    Close Sidenav Left
-                </md-button>
-            </md-content>
-        </md-sidenav>
+        <sidenav close='global.toggleSidenav()'></sidenav>
     </header>
     <!-- end header -->
 

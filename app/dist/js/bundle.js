@@ -18,6 +18,17 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
                 controller: 'LoginCtrl',
                 controllerAs: 'login'
         })
+        .when('/shop/:productIndex', {
+            templateUrl: 'shop/shop.html',
+            controller: 'ShopCtrl',
+            controllerAs: 'shop',
+            resolve: {
+                product: function($route, Products) {
+                    var productIndex = $route.current.params.productIndex;
+                    return Products.get(productIndex);
+                }
+            }
+        })
         .when('/cubes', {
             templateUrl: 'cubes/cubes.html'
         })
@@ -99,6 +110,16 @@ angular.module('starterTemplate')
 })();
 
 (function() {
+  'use strict';
+
+  angular.module('starterTemplate')
+
+  .controller('ShopCtrl', function(product) {
+    this.product = product;
+  });
+
+})();
+(function() {
         'use strict';
 
         angular.module('starterTemplate')
@@ -141,6 +162,41 @@ angular.module('starterTemplate')
 
 
 (function() {
+    'use strict';
+
+    angular.module('starterTemplate')
+
+    .factory('Products', function($q) {
+        var p = {};
+
+        var digitalPosters = {
+            title: 'Digital Posters'
+        };
+
+        var eventranet = {
+            title: 'Eventranet'
+        };
+
+        var speakersPrep = {
+            title: 'Speakers Prep'
+        };
+
+        var products = [digitalPosters, eventranet, speakersPrep];
+
+        /*==========  public methods  ==========*/
+
+        p.get = function(productIndex) {
+            var deferred = $q.defer();
+            deferred.resolve(products[productIndex]);
+            return deferred.promise;
+        };
+
+        return p;
+    });
+
+})();
+
+(function() {
 'use strict';
 
 angular.module('starterTemplate')
@@ -166,6 +222,24 @@ angular.module('starterTemplate')
 })();
 
 
+(function() {
+  'use strict';
+
+  angular.module('starterTemplate')
+
+  .directive('sidenav', function() {
+    return {
+      restrtict: 'E',
+      scope: {
+        close: '&'
+      },
+      templateUrl: 'components/sidenav/sidenav.html',
+      link: function(scope, elem, attrs) {
+      }
+    };
+  });
+
+})();
 (function() {
         'use strict';
 
