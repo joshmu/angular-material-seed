@@ -174,6 +174,9 @@ angular.module('starterTemplate')
         var products = [digitalPosters, eventranet, speakersPrep];
 
         /*==========  public methods  ==========*/
+        p.all = function() {
+          return products;
+        };
 
         p.get = function(productIndex) {
             var deferred = $q.defer();
@@ -217,13 +220,28 @@ angular.module('starterTemplate')
 
   angular.module('starterTemplate')
 
+  .controller('SidenavCtrl', function(Products) {
+
+    this.products = Products.all();
+
+  });
+
+})();
+(function() {
+  'use strict';
+
+  angular.module('starterTemplate')
+
   .directive('sidenav', function() {
     return {
       restrtict: 'E',
+      templateUrl: 'components/sidenav/sidenav.html',
+      controller: 'SidenavCtrl',
+      controllerAs: 'sidenav',
+      bindToController: true,
       scope: {
         close: '&'
       },
-      templateUrl: 'components/sidenav/sidenav.html',
       link: function(scope, elem, attrs) {
       }
     };

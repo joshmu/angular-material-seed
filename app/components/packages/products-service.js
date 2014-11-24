@@ -21,6 +21,9 @@
         var products = [digitalPosters, eventranet, speakersPrep];
 
         /*==========  public methods  ==========*/
+        p.all = function() {
+          return products;
+        };
 
         p.get = function(productIndex) {
             var deferred = $q.defer();

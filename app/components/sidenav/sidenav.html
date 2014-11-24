@@ -3,7 +3,21 @@
         <h1 class="md-toolbar-tools">Sidenav Left</h1>
     </md-toolbar>
     <md-content class="md-padding">
-        <md-button ng-click="close()" class="md-primary">
+
+        <md-list>
+            <md-item ng-repeat='product in sidenav.products'>
+
+                <a href='#!/shop/{{$index}}'>
+                    <md-button>
+                        <h3>{{product.title}}</h3>
+                    </md-button>
+                </a>
+
+                <md-divider ng-if="!$last"></md-divider>
+            </md-item>
+        </md-list>
+
+        <md-button style='margin-top:20px;' ng-click="sidenav.close()" class="md-primary">
             Close Sidenav Left
         </md-button>
     </md-content>
