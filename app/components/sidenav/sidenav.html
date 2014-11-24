@@ -8,7 +8,7 @@
             <md-item ng-repeat='product in sidenav.products'>
 
                 <a href='#!/shop/{{$index}}'>
-                    <md-button>
+                    <md-button class='md-primary' md-theme='{{product.theme}}'>
                         <h3>{{product.title}}</h3>
                     </md-button>
                 </a>

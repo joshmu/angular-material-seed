@@ -1,3 +1,15 @@
-<div class="shop-container">
-  <md-toolbar>{{shop.product.title}}</md-toolbar>
+<div class="shop-container" md-theme='{{shop.product.theme}}' layout layout-padding layout-align='center center'>
+    <md-whiteframe layout='column' layout-padding flex='80' class='md-whiteframe-z2'>
+        <md-toolbar layout layout-align='center center' style='margin-bottom:20px;'>
+            <h2>{{::shop.product.title}}</h2>
+        </md-toolbar>
+        <div layout="row" layout-align="center center">
+          <p flex='80'>{{::shop.product.description}}</p>
+        </div>
+        <div layout="row" layout-align="end" style='position:relative'>
+          <a href="#!/home" style='position:relative;bottom:-30px;right:-30px;'>
+            <md-button class='md-primary md-fab md-raised' aria-label='home'><i class="fa fa-2x fa-home"></i></md-button>
+          </a>
+        </div>
+    </md-whiteframe>
 </div>
