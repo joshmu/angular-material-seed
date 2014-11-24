@@ -47,7 +47,7 @@
                     <span style='margin-left:10px'>{{global.auth.user.email}}</span>
                 </div>
                 <div flex>
-                    <a ng-hide='global.auth.user' href="#!/login">
+                    <a ng-hide='global.auth.user || global.currentPath() === "/login"' href="#!/login">
                         <md-button>Login/Register</md-button>
                     </a>
                         <md-button ng-show='global.auth.user' ng-click='global.logout()'>Logout</md-button>

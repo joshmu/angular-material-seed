@@ -27,7 +27,7 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
 
 })
 
-.controller('GlobalCtrl', function(Auth, $mdSidenav, $mdToast, $mdBottomSheet, ToastPreset) {
+.controller('GlobalCtrl', function($location, Auth, $mdSidenav, $mdToast, $mdBottomSheet, ToastPreset) {
         this.auth = Auth;
 
         this.logout = function() {
@@ -53,6 +53,10 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
 
     this.toggleSidenav = function() {
         $mdSidenav('sidenav').toggle();
+    };
+
+    this.currentPath = function() {
+        return $location.path();
     };
 });
 
