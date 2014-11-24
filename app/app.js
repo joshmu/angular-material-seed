@@ -24,9 +24,10 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
         .otherwise({
             redirectTo: '/'
         });
+
 })
 
-.controller('GlobalCtrl', function(Auth, $mdSidenav, $mdToast, $mdBottomSheet) {
+.controller('GlobalCtrl', function(Auth, $mdSidenav, $mdToast, $mdBottomSheet, ToastPreset) {
         this.auth = Auth;
 
         this.logout = function() {
@@ -39,16 +40,7 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
         };
 
     this.showToast = function() {
-        $mdToast.show({
-            templateUrl: 'components/toast/toast.html',
-            hideDelay: 5000,
-            position: 'bottom right',
-            controller: 'ToastCtrl',
-            controllerAs: 'toast',
-            locals: {
-                msg: 'Hello there!'
-            }
-        });
+        $mdToast.show(ToastPreset.locals({msg: 'Yo yo yo!'}));
     };
 
     this.showSheet = function() {

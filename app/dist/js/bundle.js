@@ -24,9 +24,10 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
         .otherwise({
             redirectTo: '/'
         });
+
 })
 
-.controller('GlobalCtrl', function(Auth, $mdSidenav, $mdToast, $mdBottomSheet) {
+.controller('GlobalCtrl', function(Auth, $mdSidenav, $mdToast, $mdBottomSheet, ToastPreset) {
         this.auth = Auth;
 
         this.logout = function() {
@@ -39,16 +40,7 @@ angular.module('starterTemplate', ['ngRoute', 'ngMaterial'])
         };
 
     this.showToast = function() {
-        $mdToast.show({
-            templateUrl: 'components/toast/toast.html',
-            hideDelay: 5000,
-            position: 'bottom right',
-            controller: 'ToastCtrl',
-            controllerAs: 'toast',
-            locals: {
-                msg: 'Hello there!'
-            }
-        });
+        $mdToast.show(ToastPreset.locals({msg: 'Yo yo yo!'}));
     };
 
     this.showSheet = function() {
@@ -81,7 +73,7 @@ angular.module('starterTemplate')
 
         angular.module('starterTemplate')
 
-        .controller('LoginCtrl', function(Auth, $mdToast, $location) {
+        .controller('LoginCtrl', function(Auth, $mdToast, $location, ToastPreset) {
                 var loginCtrl = this;
 
                 loginCtrl.auth = Auth;
@@ -91,22 +83,11 @@ angular.module('starterTemplate')
                 loginCtrl.login = function() {
                     loginCtrl.auth.login(loginCtrl.user)
                         .then(function(data, user) {
-                            $mdToast.show({
-                                    templateUrl: 'components/toast/toast.html',
-                                    hideDelay: 5000,
-                                    position: 'bottom right',
-                                    controller: 'ToastCtrl',
-                                    controllerAs: 'toast',
-                                    locals: {
-                                            msg: data
-                                    }
-                            });
+                            $mdToast.show(ToastPreset.locals({msg: data}));
+                            $location.path('#!/home');
                         }, function() {
-                                console.log('login failed....');
+                            $mdToast.show(ToastPreset.locals({msg: 'login failed...'}));
                                 loginCtrl.user = undefined;
-                        })
-                        .then(function() {
-                                $location.path('#!/home');
                         });
                 };
 
@@ -189,4 +170,29 @@ angular.module('starterTemplate')
         .controller('ToastCtrl', function(msg) {
                 this.msg = msg;
         });
+})();
+
+(function() {
+    'use strict';
+
+    angular.module('starterTemplate')
+
+    .factory('ToastPreset', function($mdToast) {
+        var preset = {};
+        preset.template = $mdToast.build()
+            .templateUrl('components/toast/toast.html')
+            .hideDelay(5000)
+            .position('bottom right')
+            .controller('ToastCtrl')
+            .controllerAs('toast');
+
+            //helper function to add locals key
+        preset.locals = function(obj) {
+            this.template._options.locals = obj;
+            return this.template;
+        };
+
+        return preset;
+    });
+
 })();
